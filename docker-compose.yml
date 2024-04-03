@@ -1,0 +1,14 @@
+services:
+  notebook:
+    # This
+    build: .
+    container_name: pyspark-container
+    # This maps the volume, so that changes in this folder will be reflected in the code dir, where the code is copied via Dockerif
+    volumes:
+      - .:/code
+    # This is to keep it running forever, because the anything file does not exist. Useful for now.
+    command: tail -F anything
+    # This is to set the user, because the Dockerfile will just build the image, but not with the user. So there you go.
+    user: root
+    # This should be the same as the dir where the source code will be at.
+    working_dir: /code
